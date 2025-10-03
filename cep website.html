@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCare Plus - Your Health, Our Priority</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .dark-mode {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        
+        .dark-mode .bg-white {
+            background-color: #2d3748 !important;
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .text-gray-800 {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .text-gray-600 {
+            color: #a0aec0 !important;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .health-stat {
+            counter-reset: stat-counter;
+        }
+        
+        .stat-number {
+            animation: countUp 2s ease-out;
+        }
+        
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-heartbeat text-blue-600 text-2xl mr-2"></i>
+                    <span class="text-xl font-bold text-gray-800">HealthCare Plus</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" onclick="showPage('home')" class="text-gray-700 hover:text-blue-600 transition duration-300">Home</a>
+                    <a href="#" onclick="showPage('hygiene')" class="text-gray-700 hover:text-blue-600 transition duration-300">Hygiene</a>
+                    <a href="#" onclick="showPage('diet')" class="text-gray-700 hover:text-blue-600 transition duration-300">Balanced Diet</a>
+                    <a href="#" onclick="showPage('advantages')" class="text-gray-700 hover:text-blue-600 transition duration-300">Healthcare</a>
+                    <a href="#" onclick="showPage('diseases')" class="text-gray-700 hover:text-blue-600 transition duration-300">Diseases</a>
+                    <a href="#" onclick="showPage('health-check')" class="text-gray-700 hover:text-blue-600 transition duration-300">Health Check</a>
+                    <a href="#" onclick="showPage('emergency')" class="text-gray-700 hover:text-blue-600 transition duration-300">Emergency</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-lg hover:bg-gray-100 transition duration-300">
+                        <i class="fas fa-moon text-gray-600"></i>
+                    </button>
+                    <select onchange="changeLanguage(this.value)" class="p-2 rounded-lg border border-gray-300 text-sm">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                    </select>
+                    <button onclick="toggleSpeech()" class="p-2 rounded-lg hover:bg-gray-100 transition duration-300">
+                        <i class="fas fa-volume-up text-gray-600"></i>
+                    </button>
+                </div>
+                
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" onclick="showPage('home')" class="block px-3 py-2 text-gray-700">Home</a>
+                <a href="#" onclick="showPage('hygiene')" class="block px-3 py-2 text-gray-700">Hygiene</a>
+                <a href="#" onclick="showPage('diet')" class="block px-3 py-2 text-gray-700">Balanced Diet</a>
+                <a href="#" onclick="showPage('advantages')" class="block px-3 py-2 text-gray-700">Healthcare</a>
+                <a href="#" onclick="showPage('diseases')" class="block px-3 py-2 text-gray-700">Diseases</a>
+                <a href="#" onclick="showPage('health-check')" class="block px-3 py-2 text-gray-700">Health Check</a>
+                <a href="#" onclick="showPage('emergency')" class="block px-3 py-2 text-gray-700">Emergency</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page">
+        <!-- Hero Section -->
+        <section class="hero-gradient text-white pt-20 pb-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 fade-in">Your Health, Our Priority</h1>
+                    <p class="text-xl md:text-2xl mb-8 fade-in">Comprehensive healthcare information and tools for a healthier you</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                        <button onclick="showPage('health-check')" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 pulse-animation">
+                            Check Your Health Now
+                        </button>
+                        <button onclick="showPage('diseases')" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
+                            Learn About Diseases
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Our Health Services</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg card-hover cursor-pointer" onclick="showPage('hygiene')">
+                        <div class="text-center">
+                            <i class="fas fa-hands-wash text-4xl text-blue-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Personal Hygiene</h3>
+                            <p class="text-gray-600">Learn essential hygiene practices for daily health and disease prevention</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-lg card-hover cursor-pointer" onclick="showPage('diet')">
+                        <div class="text-center">
+                            <i class="fas fa-apple-alt text-4xl text-green-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Balanced Diet</h3>
+                            <p class="text-gray-600">Discover nutritious meal plans and dietary guidelines for optimal health</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-lg card-hover cursor-pointer" onclick="showPage('diseases')">
+                        <div class="text-center">
+                            <i class="fas fa-stethoscope text-4xl text-red-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Disease Information</h3>
+                            <p class="text-gray-600">Comprehensive information about common diseases and their prevention</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Health Statistics -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Health by Numbers</h2>
+                <div class="grid md:grid-cols-4 gap-8 text-center">
+                    <div class="health-stat">
+                        <div class="text-4xl font-bold text-blue-600 stat-number">98%</div>
+                        <p class="text-gray-600 mt-2">Preventable Diseases</p>
+                    </div>
+                    <div class="health-stat">
+                        <div class="text-4xl font-bold text-green-600 stat-number">75%</div>
+                        <p class="text-gray-600 mt-2">Health Improvement</p>
+                    </div>
+                    <div class="health-stat">
+                        <div class="text-4xl font-bold text-purple-600 stat-number">24/7</div>
+                        <p class="text-gray-600 mt-2">Health Support</p>
+                    </div>
+                    <div class="health-stat">
+                        <div class="text-4xl font-bold text-red-600 stat-number">1M+</div>
+                        <p class="text-gray-600 mt-2">Lives Improved</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Health Quiz Section -->
+        <section class="py-16 bg-blue-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">How Healthy Are Your Habits?</h2>
+                <p class="text-gray-600 mb-8">Take our quick quiz to assess your current health habits</p>
+                <button onclick="startHealthQuiz()" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
+                    Start Health Quiz
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Hygiene Page -->
+    <div id="hygiene-page" class="page hidden">
+        <div class="pt-20 pb-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Personal & Public Hygiene</h1>
+                
+                <!-- Personal Hygiene Section -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-blue-600 mb-6">Personal Hygiene Essentials</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Daily Hygiene Checklist</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Brush teeth twice daily</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Wash hands frequently</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Shower or bathe daily</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Trim nails regularly</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Wash hair 2-3 times per week</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Use deodorant</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Change clothes daily</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Hand Washing Steps</h3>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center p-2 bg-blue-50 rounded">
+                                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3">1</span>
+                                    Wet hands with clean water
+                                </div>
+                                <div class="flex items-center p-2 bg-blue-50 rounded">
+                                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3">2</span>
+                                    Apply soap and lather well
+                                </div>
+                                <div class="flex items-center p-2 bg-blue-50 rounded">
+                                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3">3</span>
+                                    Scrub for at least 20 seconds
+                                </div>
+                                <div class="flex items-center p-2 bg-blue-50 rounded">
+                                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3">4</span>
+                                    Rinse thoroughly with water
+                                </div>
+                                <div class="flex items-center p-2 bg-blue-50 rounded">
+                                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3">5</span>
+                                    Dry with clean towel
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Germ Spread Infographic -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-red-600 mb-6">How Germs Spread</h2>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center p-4 border-2 border-red-200 rounded-lg">
+                            <i class="fas fa-hand-paper text-3xl text-red-600 mb-3"></i>
+                            <h3 class="font-semibold mb-2">Direct Contact</h3>
+                            <p class="text-sm text-gray-600">Through touching infected surfaces or people</p>
+                        </div>
+                        <div class="text-center p-4 border-2 border-orange-200 rounded-lg">
+                            <i class="fas fa-wind text-3xl text-orange-600 mb-3"></i>
+                            <h3 class="font-semibold mb-2">Airborne</h3>
+                            <p class="text-sm text-gray-600">Through coughing, sneezing, or breathing</p>
+                        </div>
+                        <div class="text-center p-4 border-2 border-yellow-200 rounded-lg">
+                            <i class="fas fa-utensils text-3xl text-yellow-600 mb-3"></i>
+                            <h3 class="font-semibold mb-2">Food & Water</h3>
+                            <p class="text-sm text-gray-600">Through contaminated food or water</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Public Hygiene -->
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-green-600 mb-6">Public Hygiene Guidelines</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">In Public Spaces</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center"><i class="fas fa-mask text-blue-600 mr-3"></i>Wear masks when required</li>
+                                <li class="flex items-center"><i class="fas fa-people-arrows text-blue-600 mr-3"></i>Maintain social distance</li>
+                                <li class="flex items-center"><i class="fas fa-hand-sanitizer text-blue-600 mr-3"></i>Use hand sanitizer frequently</li>
+                                <li class="flex items-center"><i class="fas fa-tissue text-blue-600 mr-3"></i>Cover coughs and sneezes</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Environmental Hygiene</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center"><i class="fas fa-trash text-green-600 mr-3"></i>Dispose waste properly</li>
+                                <li class="flex items-center"><i class="fas fa-recycle text-green-600 mr-3"></i>Keep surroundings clean</li>
+                                <li class="flex items-center"><i class="fas fa-water text-green-600 mr-3"></i>Avoid water stagnation</li>
+                                <li class="flex items-center"><i class="fas fa-leaf text-green-600 mr-3"></i>Maintain green spaces</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Balanced Diet Page -->
+    <div id="diet-page" class="page hidden">
+        <div class="pt-20 pb-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Balanced Diet & Nutrition</h1>
+                
+                <!-- Diet Benefits -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-green-600 mb-6">Benefits of Balanced Diet</h2>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center p-4">
+                            <i class="fas fa-heart text-3xl text-red-600 mb-3"></i>
+                            <h3 class="font-semibold mb-2">Heart Health</h3>
+                            <p class="text-sm text-gray-600">Reduces risk of cardiovascular diseases</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <i class="fas fa-brain text-3xl text-purple-600 mb-3"></i>
+                            <h3 class="font-semibold mb-2">Brain Function</h3>
+                            <p class="text-sm text-gray-600">Improves cognitive abilities and memory</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <i class="fas fa-dumbbell text-3xl text-blue-600 mb-3"></i>
+                            <h3 class="font-semibold mb-2">Energy Levels</h3>
+                            <p class="text-sm text-gray-600">Maintains consistent energy throughout day</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plate Diagram -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-blue-600 mb-6 text-center">Balanced Plate Guide</h2>
+                    <div class="flex justify-center mb-6">
+                        <div class="relative w-64 h-64">
+                            <svg viewBox="0 0 200 200" class="w-full h-full">
+                                <circle cx="100" cy="100" r="95" fill="#f3f4f6" stroke="#374151" stroke-width="2"/>
+                                <path d="M 100 100 L 100 5 A 95 95 0 0 1 195 100 Z" fill="#10b981" opacity="0.8"/>
+                                <path d="M 100 100 L 195 100 A 95 95 0 0 1 100 195 Z" fill="#3b82f6" opacity="0.8"/>
+                                <path d="M 100 100 L 100 195 A 95 95 0 0 1 5 100 Z" fill="#f59e0b" opacity="0.8"/>
+                                <path d="M 100 100 L 5 100 A 95 95 0 0 1 100 5 Z" fill="#ef4444" opacity="0.8"/>
+                                <text x="100" y="50" text-anchor="middle" class="text-xs font-semibold fill-white">Vegetables</text>
+                                <text x="150" y="105" text-anchor="middle" class="text-xs font-semibold fill-white">Proteins</text>
+                                <text x="100" y="160" text-anchor="middle" class="text-xs font-semibold fill-white">Grains</text>
+                                <text x="50" y="105" text-anchor="middle" class="text-xs font-semibold fill-white">Fruits</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-4 gap-4 text-center">
+                        <div class="p-3 bg-green-50 rounded-lg">
+                            <div class="w-4 h-4 bg-green-500 rounded mx-auto mb-2"></div>
+                            <h4 class="font-semibold">Vegetables</h4>
+                            <p class="text-xs text-gray-600">50% of plate</p>
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded-lg">
+                            <div class="w-4 h-4 bg-blue-500 rounded mx-auto mb-2"></div>
+                            <h4 class="font-semibold">Proteins</h4>
+                            <p class="text-xs text-gray-600">25% of plate</p>
+                        </div>
+                        <div class="p-3 bg-yellow-50 rounded-lg">
+                            <div class="w-4 h-4 bg-yellow-500 rounded mx-auto mb-2"></div>
+                            <h4 class="font-semibold">Grains</h4>
+                            <p class="text-xs text-gray-600">25% of plate</p>
+                        </div>
+                        <div class="p-3 bg-red-50 rounded-lg">
+                            <div class="w-4 h-4 bg-red-500 rounded mx-auto mb-2"></div>
+                            <h4 class="font-semibold">Fruits</h4>
+                            <p class="text-xs text-gray-600">Side portion</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Indian Meal Plans -->
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-green-600 mb-4">Vegetarian Meal Plan</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Breakfast</h4>
+                                <p class="text-sm text-gray-600">Oats upma with vegetables, glass of milk</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Lunch</h4>
+                                <p class="text-sm text-gray-600">Brown rice, dal, mixed vegetables, curd</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Snack</h4>
+                                <p class="text-sm text-gray-600">Fruits, nuts, green tea</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Dinner</h4>
+                                <p class="text-sm text-gray-600">Roti, paneer curry, salad</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-orange-600 mb-4">Non-Vegetarian Meal Plan</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Breakfast</h4>
+                                <p class="text-sm text-gray-600">Egg omelet with vegetables, whole wheat toast</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Lunch</h4>
+                                <p class="text-sm text-gray-600">Brown rice, chicken curry, vegetables, curd</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Snack</h4>
+                                <p class="text-sm text-gray-600">Fruits, yogurt, green tea</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Dinner</h4>
+                                <p class="text-sm text-gray-600">Roti, fish curry, salad</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hydration & Tips -->
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-blue-600 mb-6">Hydration & Healthy Tips</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Daily Hydration</h3>
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-tint text-blue-600 text-2xl mr-4"></i>
+                                <div>
+                                    <p class="font-semibold">8-10 glasses of water daily</p>
+                                    <p class="text-sm text-gray-600">Adjust based on activity and climate</p>
+                                </div>
+                            </div>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Start day with water</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Drink before meals</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Include coconut water</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Limit sugary drinks</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Avoid Junk Food</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center p-3 bg-red-50 rounded-lg">
+                                    <i class="fas fa-times text-red-600 mr-3"></i>
+                                    <span class="text-sm">Processed snacks & chips</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-red-50 rounded-lg">
+                                    <i class="fas fa-times text-red-600 mr-3"></i>
+                                    <span class="text-sm">Sugary beverages</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-red-50 rounded-lg">
+                                    <i class="fas fa-times text-red-600 mr-3"></i>
+                                    <span class="text-sm">Fast food & fried items</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-red-50 rounded-lg">
+                                    <i class="fas fa-times text-red-600 mr-3"></i>
+                                    <span class="text-sm">Excessive sweets</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Healthcare Advantages Page -->
+    <div id="advantages-page" class="page hidden">
+        <div class="pt-20 pb-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Healthcare Advantages</h1>
+                
+                <!-- Regular Checkups -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-blue-600 mb-6">Importance of Regular Checkups</h2>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center p-4 border-2 border-blue-200 rounded-lg">
+                            <i class="fas fa-search text-3xl text-blue-600 mb-3"></i>
+                            <h3 class="font-semibold mb-2">Early Detection</h3>
+                            <p class="text-sm text-gray-600">Identify health issues before symptoms appear</p>
+                        </div>
+                        <div class="text-center p-4 border-2 border-green-200 rounded-lg">
+                            <i class="fas fa-shield-alt text-3xl text-green-600 mb-3"></i>
+                            <h3 class="font-semibold mb-2">Prevention</h3>
+                            <p class="text-sm text-gray-600">Prevent diseases through timely intervention</p>
+                        </div>
+                        <div class="text-center p-4 border-2 border-purple-200 rounded-lg">
+                            <i class="fas fa-chart-line text-3xl text-purple-600 mb-3"></i>
+                            <h3 class="font-semibold mb-2">Health Monitoring</h3>
+                            <p class="text-sm text-gray-600">Track health progress over time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preventive vs Reactive Care -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-green-600 mb-6">Preventive vs Reactive Care</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="p-6 bg-green-50 rounded-lg">
+                            <h3 class="text-xl font-semibold text-green-700 mb-4">Preventive Care</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Regular health screenings</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Vaccinations and immunizations</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Lifestyle counseling</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Health education</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Lower long-term costs</li>
+                            </ul>
+                        </div>
+                        <div class="p-6 bg-red-50 rounded-lg">
+                            <h3 class="text-xl font-semibold text-red-700 mb-4">Reactive Care</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center"><i class="fas fa-exclamation text-red-600 mr-3"></i>Treatment after illness occurs</li>
+                                <li class="flex items-center"><i class="fas fa-exclamation text-red-600 mr-3"></i>Emergency interventions</li>
+                                <li class="flex items-center"><i class="fas fa-exclamation text-red-600 mr-3"></i>Higher treatment complexity</li>
+                                <li class="flex items-center"><i class="fas fa-exclamation text-red-600 mr-3"></i>Increased recovery time</li>
+                                <li class="flex items-center"><i class="fas fa-exclamation text-red-600 mr-3"></i>Higher medical expenses</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Early Detection Benefits -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-purple-600 mb-6">Benefits of Early Detection</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Health Benefits</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <i class="fas fa-heart text-red-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">Better Treatment Outcomes</h4>
+                                        <p class="text-sm text-gray-600">Earlier treatment leads to better recovery rates</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-clock text-blue-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">Reduced Treatment Time</h4>
+                                        <p class="text-sm text-gray-600">Shorter recovery periods and less invasive treatments</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-smile text-yellow-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">Better Quality of Life</h4>
+                                        <p class="text-sm text-gray-600">Maintain normal activities and lifestyle</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Economic Benefits</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <i class="fas fa-dollar-sign text-green-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">Lower Medical Costs</h4>
+                                        <p class="text-sm text-gray-600">Prevention costs less than treatment</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-briefcase text-purple-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">Reduced Work Loss</h4>
+                                        <p class="text-sm text-gray-600">Fewer sick days and productivity loss</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-family text-orange-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">Family Benefits</h4>
+                                        <p class="text-sm text-gray-600">Less stress and financial burden on family</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technology in Healthcare -->
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-indigo-600 mb-6">Technology in Modern Healthcare</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">AI & Machine Learning</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center"><i class="fas fa-robot text-indigo-600 mr-3"></i>Diagnostic assistance</li>
+                                <li class="flex items-center"><i class="fas fa-brain text-indigo-600 mr-3"></i>Predictive analytics</li>
+                                <li class="flex items-center"><i class="fas fa-chart-bar text-indigo-600 mr-3"></i>Treatment optimization</li>
+                                <li class="flex items-center"><i class="fas fa-microscope text-indigo-600 mr-3"></i>Medical imaging analysis</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Wearable Technology</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center"><i class="fas fa-heartbeat text-red-600 mr-3"></i>Heart rate monitoring</li>
+                                <li class="flex items-center"><i class="fas fa-walking text-green-600 mr-3"></i>Activity tracking</li>
+                                <li class="flex items-center"><i class="fas fa-bed text-blue-600 mr-3"></i>Sleep pattern analysis</li>
+                                <li class="flex items-center"><i class="fas fa-mobile-alt text-purple-600 mr-3"></i>Real-time health alerts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diseases Page -->
+    <div id="diseases-page" class="page hidden">
+        <div class="pt-20 pb-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Common Diseases Information</h1>
+                
+                <!-- Disease Cards Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white rounded-lg shadow-lg p-6 card-hover cursor-pointer" onclick="showDiseaseDetail('heart-attack')">
+                        <div class="text-center">
+                            <i class="fas fa-heartbeat text-4xl text-red-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Heart Attack</h3>
+                            <p class="text-gray-600 text-sm">Learn about causes, symptoms, and prevention</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6 card-hover cursor-pointer" onclick="showDiseaseDetail('cancer')">
+                        <div class="text-center">
+                            <i class="fas fa-ribbon text-4xl text-pink-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Cancer</h3>
+                            <p class="text-gray-600 text-sm">Understanding cancer types and prevention</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6 card-hover cursor-pointer" onclick="showDiseaseDetail('tuberculosis')">
+                        <div class="text-center">
+                            <i class="fas fa-lungs text-4xl text-orange-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Tuberculosis (TB)</h3>
+                            <p class="text-gray-600 text-sm">Information about TB transmission and treatment</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6 card-hover cursor-pointer" onclick="showDiseaseDetail('hiv-aids')">
+                        <div class="text-center">
+                            <i class="fas fa-shield-virus text-4xl text-purple-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">HIV/AIDS</h3>
+                            <p class="text-gray-600 text-sm">Understanding HIV/AIDS and prevention methods</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6 card-hover cursor-pointer" onclick="showDiseaseDetail('kidney-stones')">
+                        <div class="text-center">
+                            <i class="fas fa-kidney text-4xl text-yellow-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Kidney Stones</h3>
+                            <p class="text-gray-600 text-sm">Causes and prevention of kidney stones</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6 card-hover cursor-pointer" onclick="showDiseaseDetail('diabetes')">
+                        <div class="text-center">
+                            <i class="fas fa-syringe text-4xl text-blue-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Diabetes</h3>
+                            <p class="text-gray-600 text-sm">Managing and preventing diabetes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6 card-hover cursor-pointer" onclick="showDiseaseDetail('dengue')">
+                        <div class="text-center">
+                            <i class="fas fa-bug text-4xl text-green-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Dengue</h3>
+                            <p class="text-gray-600 text-sm">Dengue fever prevention and symptoms</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6 card-hover cursor-pointer" onclick="showDiseaseDetail('hypertension')">
+                        <div class="text-center">
+                            <i class="fas fa-tachometer-alt text-4xl text-indigo-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Hypertension</h3>
+                            <p class="text-gray-600 text-sm">High blood pressure management</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disease Detail Modal -->
+                <div id="disease-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                    <div class="bg-white rounded-lg max-w-4xl w-full max-h-screen overflow-y-auto">
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-6">
+                                <h2 id="disease-title" class="text-3xl font-bold text-gray-800"></h2>
+                                <button onclick="closeDiseaseModal()" class="text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-times text-2xl"></i>
+                                </button>
+                            </div>
+                            <div id="disease-content" class="space-y-6">
+                                <!-- Disease content will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Health Check Page -->
+    <div id="health-check-page" class="page hidden">
+        <div class="pt-20 pb-16">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Health Assessment Form</h1>
+                <p class="text-center text-gray-600 mb-12">Complete this form to get personalized health recommendations</p>
+                
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <form id="health-form" onsubmit="submitHealthForm(event)">
+                        <!-- Personal Information -->
+                        <div class="mb-8">
+                            <h2 class="text-2xl font-bold text-blue-600 mb-4">Personal Information</h2>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                    <input type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Age</label>
+                                    <input type="number" min="1" max="120" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Gender</label>
+                                    <select required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lifestyle Assessment -->
+                        <div class="mb-8">
+                            <h2 class="text-2xl font-bold text-green-600 mb-4">Lifestyle Assessment</h2>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Exercise Frequency</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="never">Never</option>
+                                        <option value="rarely">Rarely (1-2 times/month)</option>
+                                        <option value="sometimes">Sometimes (1-2 times/week)</option>
+                                        <option value="regularly">Regularly (3-4 times/week)</option>
+                                        <option value="daily">Daily</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Diet Quality</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="poor">Poor (mostly junk food)</option>
+                                        <option value="fair">Fair (some healthy foods)</option>
+                                        <option value="good">Good (balanced diet)</option>
+                                        <option value="excellent">Excellent (very healthy)</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Sleep Hours (per night)</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="less-than-5">Less than 5 hours</option>
+                                        <option value="5-6">5-6 hours</option>
+                                        <option value="7-8">7-8 hours</option>
+                                        <option value="more-than-8">More than 8 hours</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Stress Level</label>
+                                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="low">Low</option>
+                                        <option value="moderate">Moderate</option>
+                                        <option value="high">High</option>
+                                        <option value="very-high">Very High</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Symptoms Checklist -->
+                        <div class="mb-8">
+                            <h2 class="text-2xl font-bold text-red-600 mb-4">Symptoms Checklist</h2>
+                            <p class="text-gray-600 mb-4">Check any symptoms you've experienced in the past month:</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-3 h-4 w-4 text-blue-600">
+                                        <span>Frequent headaches</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-3 h-4 w-4 text-blue-600">
+                                        <span>Chest pain or discomfort</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-3 h-4 w-4 text-blue-600">
+                                        <span>Shortness of breath</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-3 h-4 w-4 text-blue-600">
+                                        <span>Persistent cough</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-3 h-4 w-4 text-blue-600">
+                                        <span>Unexplained weight loss</span>
+                                    </label>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-3 h-4 w-4 text-blue-600">
+                                        <span>Frequent fatigue</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-3 h-4 w-4 text-blue-600">
+                                        <span>Joint pain</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-3 h-4 w-4 text-blue-600">
+                                        <span>Digestive issues</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-3 h-4 w-4 text-blue-600">
+                                        <span>Sleep problems</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-3 h-4 w-4 text-blue-600">
+                                        <span>Mood changes</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
+                                Submit Health Assessment
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Privacy Note -->
+                    <div class="mt-8 p-4 bg-gray-50 rounded-lg">
+                        <h3 class="font-semibold text-gray-800 mb-2">Privacy & Data Protection</h3>
+                        <p class="text-sm text-gray-600">Your health information is confidential and secure. We use this data only to provide personalized health recommendations. Your information will not be shared with third parties without your consent.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Contacts Page -->
+    <div id="emergency-page" class="page hidden">
+        <div class="pt-20 pb-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Emergency Contacts</h1>
+                
+                <!-- Emergency Numbers -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-red-50 border-2 border-red-200 rounded-lg p-6 text-center">
+                        <i class="fas fa-ambulance text-4xl text-red-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-red-800 mb-2">Emergency Ambulance</h3>
+                        <p class="text-3xl font-bold text-red-600 mb-2">108</p>
+                        <p class="text-sm text-red-700">24/7 Emergency Medical Services</p>
+                        <button onclick="callEmergency('108')" class="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300">
+                            Call Now
+                        </button>
+                    </div>
+                    
+                    <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 text-center">
+                        <i class="fas fa-phone text-4xl text-blue-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-blue-800 mb-2">Police Emergency</h3>
+                        <p class="text-3xl font-bold text-blue-600 mb-2">100</p>
+                        <p class="text-sm text-blue-700">Police Emergency Services</p>
+                        <button onclick="callEmergency('100')" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                            Call Now
+                        </button>
+                    </div>
+                    
+                    <div class="bg-orange-50 border-2 border-orange-200 rounded-lg p-6 text-center">
+                        <i class="fas fa-fire text-4xl text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-orange-800 mb-2">Fire Emergency</h3>
+                        <p class="text-3xl font-bold text-orange-600 mb-2">101</p>
+                        <p class="text-sm text-orange-700">Fire Department Services</p>
+                        <button onclick="callEmergency('101')" class="mt-4 bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition duration-300">
+                            Call Now
+                        </button>
+                    </div>
+                    
+                    <div class="bg-green-50 border-2 border-green-200 rounded-lg p-6 text-center">
+                        <i class="fas fa-brain text-4xl text-green-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-green-800 mb-2">Mental Health Helpline</h3>
+                        <p class="text-3xl font-bold text-green-600 mb-2">9152987821</p>
+                        <p class="text-sm text-green-700">24/7 Mental Health Support</p>
+                        <button onclick="callEmergency('9152987821')" class="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+                            Call Now
+                        </button>
+                    </div>
+                    
+                    <div class="bg-purple-50 border-2 border-purple-200 rounded-lg p-6 text-center">
+                        <i class="fas fa-female text-4xl text-purple-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-purple-800 mb-2">Women Helpline</h3>
+                        <p class="text-3xl font-bold text-purple-600 mb-2">1091</p>
+                        <p class="text-sm text-purple-700">Women Safety & Support</p>
+                        <button onclick="callEmergency('1091')" class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-300">
+                            Call Now
+                        </button>
+                    </div>
+                    
+                    <div class="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-6 text-center">
+                        <i class="fas fa-child text-4xl text-yellow-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-yellow-800 mb-2">Child Helpline</h3>
+                        <p class="text-3xl font-bold text-yellow-600 mb-2">1098</p>
+                        <p class="text-sm text-yellow-700">Child Protection Services</p>
+                        <button onclick="callEmergency('1098')" class="mt-4 bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition duration-300">
+                            Call Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Emergency Tips -->
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-red-600 mb-6">Emergency Response Tips</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Before Emergency</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Keep emergency numbers handy</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Know your location address</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Have a first aid kit ready</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Learn basic CPR</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">During Emergency</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center"><i class="fas fa-exclamation text-red-600 mr-3"></i>Stay calm and assess situation</li>
+                                <li class="flex items-center"><i class="fas fa-exclamation text-red-600 mr-3"></i>Call appropriate emergency number</li>
+                                <li class="flex items-center"><i class="fas fa-exclamation text-red-600 mr-3"></i>Provide clear location details</li>
+                                <li class="flex items-center"><i class="fas fa-exclamation text-red-600 mr-3"></i>Follow dispatcher instructions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-heartbeat text-blue-400 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">HealthCare Plus</span>
+                    </div>
+                    <p class="text-gray-300">Your trusted partner for comprehensive healthcare information and wellness guidance.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" onclick="showPage('home')" class="text-gray-300 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="#" onclick="showPage('diseases')" class="text-gray-300 hover:text-white transition duration-300">Diseases</a></li>
+                        <li><a href="#" onclick="showPage('health-check')" class="text-gray-300 hover:text-white transition duration-300">Health Check</a></li>
+                        <li><a href="#" onclick="showPage('emergency')" class="text-gray-300 hover:text-white transition duration-300">Emergency</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Health Topics</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" onclick="showPage('hygiene')" class="text-gray-300 hover:text-white transition duration-300">Hygiene</a></li>
+                        <li><a href="#" onclick="showPage('diet')" class="text-gray-300 hover:text-white transition duration-300">Balanced Diet</a></li>
+                        <li><a href="#" onclick="showPage('advantages')" class="text-gray-300 hover:text-white transition duration-300">Healthcare Benefits</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+                    <p class="text-gray-300 mb-4">Subscribe for health tips and updates</p>
+                    <form onsubmit="subscribeNewsletter(event)" class="flex">
+                        <input type="email" placeholder="Your email" class="flex-1 p-2 rounded-l-lg text-gray-800" required>
+                        <button type="submit" class="bg-blue-600 px-4 py-2 rounded-r-lg hover:bg-blue-700 transition duration-300">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">&copy; 2024 HealthCare Plus. All rights reserved. | Designed for better health awareness.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Health Quiz Modal -->
+    <div id="quiz-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Health Habits Quiz</h2>
+                    <button onclick="closeQuizModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="quiz-content">
+                    <!-- Quiz content will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentLanguage = 'en';
+        let speechEnabled = false;
+        let darkMode = false;
+        let currentQuizQuestion = 0;
+        let quizScore = 0;
+
+        // Disease information data
+        const diseaseData = {
+            'heart-attack': {
+                title: 'Heart Attack',
+                icon: 'fas fa-heartbeat',
+                color: 'red',
+                causes: [
+                    'Blocked coronary arteries',
+                    'High cholesterol levels',
+                    'High blood pressure',
+                    'Smoking and tobacco use',
+                    'Diabetes',
+                    'Obesity and sedentary lifestyle'
+                ],
+                symptoms: [
+                    'Chest pain or discomfort',
+                    'Shortness of breath',
+                    'Pain in arms, neck, jaw, or back',
+                    'Nausea or vomiting',
+                    'Cold sweats',
+                    'Lightheadedness'
+                ],
+                prevention: [
+                    'Maintain healthy diet',
+                    'Regular exercise',
+                    'Quit smoking',
+                    'Manage stress',
+                    'Control blood pressure',
+                    'Regular health checkups'
+                ],
+                treatment: [
+                    'Emergency medical care (Call 108)',
+                    'Medications (aspirin, clot busters)',
+                    'Angioplasty or bypass surgery',
+                    'Cardiac rehabilitation',
+                    'Lifestyle modifications',
+                    'Long-term medication management'
+                ]
+            },
+            'cancer': {
+                title: 'Cancer',
+                icon: 'fas fa-ribbon',
+                color: 'pink',
+                causes: [
+                    'Genetic factors',
+                    'Tobacco and alcohol use',
+                    'Environmental toxins',
+                    'Radiation exposure',
+                    'Certain infections',
+                    'Poor diet and obesity'
+                ],
+                symptoms: [
+                    'Unexplained weight loss',
+                    'Persistent fatigue',
+                    'Unusual lumps or growths',
+                    'Changes in skin or moles',
+                    'Persistent cough or hoarseness',
+                    'Changes in bowel or bladder habits'
+                ],
+                prevention: [
+                    'Avoid tobacco products',
+                    'Limit alcohol consumption',
+                    'Maintain healthy weight',
+                    'Regular screening tests',
+                    'Protect from sun exposure',
+                    'Vaccination (HPV, Hepatitis B)'
+                ],
+                treatment: [
+                    'Surgery to remove tumors',
+                    'Chemotherapy',
+                    'Radiation therapy',
+                    'Immunotherapy',
+                    'Targeted therapy',
+                    'Palliative care'
+                ]
+            },
+            'tuberculosis': {
+                title: 'Tuberculosis (TB)',
+                icon: 'fas fa-lungs',
+                color: 'orange',
+                causes: [
+                    'Mycobacterium tuberculosis bacteria',
+                    'Airborne transmission',
+                    'Weakened immune system',
+                    'Close contact with infected person',
+                    'Poor living conditions',
+                    'Malnutrition'
+                ],
+                symptoms: [
+                    'Persistent cough (3+ weeks)',
+                    'Coughing up blood',
+                    'Chest pain',
+                    'Unexplained weight loss',
+                    'Night sweats',
+                    'Fever and fatigue'
+                ],
+                prevention: [
+                    'BCG vaccination',
+                    'Avoid close contact with TB patients',
+                    'Improve ventilation',
+                    'Maintain good nutrition',
+                    'Regular health screenings',
+                    'Complete treatment if infected'
+                ],
+                treatment: [
+                    'Anti-TB medications (6-9 months)',
+                    'Directly Observed Treatment (DOTS)',
+                    'Isolation during infectious period',
+                    'Nutritional support',
+                    'Regular monitoring',
+                    'Treatment of drug-resistant TB'
+                ]
+            },
+            'hiv-aids': {
+                title: 'HIV/AIDS',
+                icon: 'fas fa-shield-virus',
+                color: 'purple',
+                causes: [
+                    'Human Immunodeficiency Virus (HIV)',
+                    'Unprotected sexual contact',
+                    'Sharing needles or syringes',
+                    'Mother-to-child transmission',
+                    'Blood transfusion (rare)',
+                    'Occupational exposure'
+                ],
+                symptoms: [
+                    'Flu-like symptoms initially',
+                    'Persistent fatigue',
+                    'Unexplained weight loss',
+                    'Recurring infections',
+                    'Swollen lymph nodes',
+                    'Skin rashes'
+                ],
+                prevention: [
+                    'Practice safe sex (use condoms)',
+                    'Avoid sharing needles',
+                    'Get tested regularly',
+                    'Pre-exposure prophylaxis (PrEP)',
+                    'Avoid multiple partners',
+                    'Blood screening'
+                ],
+                treatment: [
+                    'Antiretroviral therapy (ART)',
+                    'Regular viral load monitoring',
+                    'CD4 count monitoring',
+                    'Treatment of opportunistic infections',
+                    'Nutritional support',
+                    'Psychological counseling'
+                ]
+            },
+            'kidney-stones': {
+                title: 'Kidney Stones',
+                icon: 'fas fa-kidney',
+                color: 'yellow',
+                causes: [
+                    'Dehydration',
+                    'High sodium diet',
+                    'Excessive protein intake',
+                    'Genetic factors',
+                    'Certain medications',
+                    'Medical conditions (diabetes, obesity)'
+                ],
+                symptoms: [
+                    'Severe pain in back or side',
+                    'Pain during urination',
+                    'Blood in urine',
+                    'Nausea and vomiting',
+                    'Frequent urination',
+                    'Cloudy or foul-smelling urine'
+                ],
+                prevention: [
+                    'Drink plenty of water (8-10 glasses)',
+                    'Limit sodium intake',
+                    'Reduce animal protein',
+                    'Limit oxalate-rich foods',
+                    'Maintain healthy weight',
+                    'Regular exercise'
+                ],
+                treatment: [
+                    'Pain management',
+                    'Increased fluid intake',
+                    'Medications to help pass stones',
+                    'Shock wave lithotripsy',
+                    'Ureteroscopy',
+                    'Surgical removal (large stones)'
+                ]
+            },
+            'diabetes': {
+                title: 'Diabetes',
+                icon: 'fas fa-syringe',
+                color: 'blue',
+                causes: [
+                    'Insulin resistance (Type 2)',
+                    'Autoimmune destruction (Type 1)',
+                    'Genetic factors',
+                    'Obesity and sedentary lifestyle',
+                    'Age and ethnicity',
+                    'Gestational factors'
+                ],
+                symptoms: [
+                    'Increased thirst and urination',
+                    'Unexplained weight loss',
+                    'Fatigue and weakness',
+                    'Blurred vision',
+                    'Slow-healing wounds',
+                    'Frequent infections'
+                ],
+                prevention: [
+                    'Maintain healthy weight',
+                    'Regular physical activity',
+                    'Balanced diet (low sugar)',
+                    'Regular health screenings',
+                    'Manage stress',
+                    'Avoid smoking'
+                ],
+                treatment: [
+                    'Blood sugar monitoring',
+                    'Insulin therapy (Type 1)',
+                    'Oral medications (Type 2)',
+                    'Diet and exercise management',
+                    'Regular medical checkups',
+                    'Complication prevention'
+                ]
+            },
+            'dengue': {
+                title: 'Dengue',
+                icon: 'fas fa-bug',
+                color: 'green',
+                causes: [
+                    'Dengue virus (DENV)',
+                    'Aedes aegypti mosquito bite',
+                    'Stagnant water breeding',
+                    'Poor sanitation',
+                    'Tropical climate',
+                    'Urban overcrowding'
+                ],
+                symptoms: [
+                    'High fever (104°F/40°C)',
+                    'Severe headache',
+                    'Eye pain',
+                    'Muscle and joint pain',
+                    'Skin rash',
+                    'Nausea and vomiting'
+                ],
+                prevention: [
+                    'Eliminate stagnant water',
+                    'Use mosquito repellents',
+                    'Wear protective clothing',
+                    'Use bed nets',
+                    'Community cleanliness',
+                    'Regular water storage cleaning'
+                ],
+                treatment: [
+                    'Supportive care (no specific cure)',
+                    'Fever and pain management',
+                    'Adequate fluid intake',
+                    'Monitor for complications',
+                    'Hospitalization if severe',
+                    'Avoid aspirin'
+                ]
+            },
+            'hypertension': {
+                title: 'Hypertension (High Blood Pressure)',
+                icon: 'fas fa-tachometer-alt',
+                color: 'indigo',
+                causes: [
+                    'Genetic factors',
+                    'High sodium diet',
+                    'Lack of physical activity',
+                    'Obesity',
+                    'Excessive alcohol consumption',
+                    'Stress and age'
+                ],
+                symptoms: [
+                    'Often no symptoms (silent killer)',
+                    'Headaches',
+                    'Shortness of breath',
+                    'Nosebleeds',
+                    'Chest pain',
+                    'Vision problems'
+                ],
+                prevention: [
+                    'Maintain healthy weight',
+                    'Regular exercise',
+                    'Limit sodium intake',
+                    'Eat potassium-rich foods',
+                    'Limit alcohol',
+                    'Manage stress'
+                ],
+                treatment: [
+                    'Lifestyle modifications',
+                    'Blood pressure medications',
+                    'Regular monitoring',
+                    'Dietary changes (DASH diet)',
+                    'Weight management',
+                    'Stress reduction techniques'
+                ]
+            }
+        };
+
+        // Quiz questions
+        const quizQuestions = [
+            {
+                question: "How many hours of sleep do you get per night?",
+                options: ["Less than 6 hours", "6-7 hours", "7-8 hours", "More than 8 hours"],
+                correct: 2,
+                explanation: "Adults need 7-8 hours of quality sleep for optimal health."
+            },
+            {
+                question: "How often do you exercise per week?",
+                options: ["Never", "1-2 times", "3-4 times", "5+ times"],
+                correct: 2,
+                explanation: "Regular exercise 3-4 times per week significantly improves health."
+            },
+            {
+                question: "How many servings of fruits and vegetables do you eat daily?",
+                options: ["1-2 servings", "3-4 servings", "5-6 servings", "7+ servings"],
+                correct: 2,
+                explanation: "5-6 servings of fruits and vegetables daily provide essential nutrients."
+            },
+            {
+                question: "How often do you wash your hands?",
+                options: ["Rarely", "Sometimes", "Frequently", "Always when needed"],
+                correct: 3,
+                explanation: "Regular handwashing is crucial for preventing infections."
+            },
+            {
+                question: "How do you manage stress?",
+                options: ["I don't manage it", "Unhealthy ways", "Some healthy methods", "Multiple healthy strategies"],
+                correct: 3,
+                explanation: "Using multiple healthy stress management strategies is most effective."
+            }
+        ];
+
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.add('hidden'));
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId + '-page');
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+                targetPage.classList.add('fade-in');
+            }
+            
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Dark mode toggle
+        function toggleDarkMode() {
+            darkMode = !darkMode;
+            document.body.classList.toggle('dark-mode');
+            
+            const icon = document.querySelector('[onclick="toggleDarkMode()"] i');
+            if (darkMode) {
+                icon.className = 'fas fa-sun text-yellow-400';
+            } else {
+                icon.className = 'fas fa-moon text-gray-600';
+            }
+        }
+
+        // Language change
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            // In a real implementation, this would translate the content
+            console.log('Language changed to:', lang);
+        }
+
+        // Text-to-speech toggle
+        function toggleSpeech() {
+            speechEnabled = !speechEnabled;
+            const icon = document.querySelector('[onclick="toggleSpeech()"] i');
+            
+            if (speechEnabled) {
+                icon.className = 'fas fa-volume-mute text-red-600';
+                speak('Text to speech enabled');
+            } else {
+                icon.className = 'fas fa-volume-up text-gray-600';
+                speechSynthesis.cancel();
+            }
+        }
+
+        // Speak function
+        function speak(text) {
+            if (speechEnabled && 'speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.8;
+                utterance.pitch = 1;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Disease detail modal
+        function showDiseaseDetail(diseaseId) {
+            const disease = diseaseData[diseaseId];
+            if (!disease) return;
+            
+            const modal = document.getElementById('disease-modal');
+            const title = document.getElementById('disease-title');
+            const content = document.getElementById('disease-content');
+            
+            title.innerHTML = `<i class="${disease.icon} text-${disease.color}-600 mr-3"></i>${disease.title}`;
+            
+            content.innerHTML = `
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-red-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-red-700 mb-4">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>Causes
+                        </h3>
+                        <ul class="space-y-2">
+                            ${disease.causes.map(cause => `<li class="flex items-start"><i class="fas fa-dot-circle text-red-600 mt-2 mr-3 text-xs"></i><span class="text-sm">${cause}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-orange-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-orange-700 mb-4">
+                            <i class="fas fa-thermometer mr-2"></i>Symptoms
+                        </h3>
+                        <ul class="space-y-2">
+                            ${disease.symptoms.map(symptom => `<li class="flex items-start"><i class="fas fa-dot-circle text-orange-600 mt-2 mr-3 text-xs"></i><span class="text-sm">${symptom}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-green-700 mb-4">
+                            <i class="fas fa-shield-alt mr-2"></i>Prevention
+                        </h3>
+                        <ul class="space-y-2">
+                            ${disease.prevention.map(prevention => `<li class="flex items-start"><i class="fas fa-dot-circle text-green-600 mt-2 mr-3 text-xs"></i><span class="text-sm">${prevention}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-4">
+                            <i class="fas fa-medkit mr-2"></i>Treatment
+                        </h3>
+                        <ul class="space-y-2">
+                            ${disease.treatment.map(treatment => `<li class="flex items-start"><i class="fas fa-dot-circle text-blue-600 mt-2 mr-3 text-xs"></i><span class="text-sm">${treatment}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            
+            if (speechEnabled) {
+                speak(`Information about ${disease.title}`);
+            }
+        }
+
+        function closeDiseaseModal() {
+            document.getElementById('disease-modal').classList.add('hidden');
+        }
+
+        // Health form submission
+        function submitHealthForm(event) {
+            event.preventDefault();
+            
+            // Simulate form processing
+            const formData = new FormData(event.target);
+            
+            // Show success message
+            alert('Health assessment submitted successfully! Our team will review your information and provide personalized recommendations within 24 hours.');
+            
+            // Reset form
+            event.target.reset();
+            
+            if (speechEnabled) {
+                speak('Health assessment submitted successfully');
+            }
+        }
+
+        // Emergency call function
+        function callEmergency(number) {
+            if (confirm(`Do you want to call ${number}?`)) {
+                // In a real app, this would initiate a phone call
+                window.open(`tel:${number}`, '_blank');
+                
+                if (speechEnabled) {
+                    speak(`Calling emergency number ${number}`);
+                }
+            }
+        }
+
+        // Newsletter subscription
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            
+            alert(`Thank you for subscribing with ${email}! You'll receive our weekly health newsletter.`);
+            event.target.reset();
+            
+            if (speechEnabled) {
+                speak('Successfully subscribed to newsletter');
+            }
+        }
+
+        // Health Quiz Functions
+        function startHealthQuiz() {
+            currentQuizQuestion = 0;
+            quizScore = 0;
+            showQuizQuestion();
+            document.getElementById('quiz-modal').classList.remove('hidden');
+        }
+
+        function showQuizQuestion() {
+            const question = quizQuestions[currentQuizQuestion];
+            const content = document.getElementById('quiz-content');
+            
+            content.innerHTML = `
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm text-gray-600">Question ${currentQuizQuestion + 1} of ${quizQuestions.length}</span>
+                        <div class="w-32 bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-600 h-2 rounded-full" style="width: ${((currentQuizQuestion + 1) / quizQuestions.length) * 100}%"></div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-6">${question.question}</h3>
+                    <div class="space-y-3">
+                        ${question.options.map((option, index) => `
+                            <button onclick="selectQuizAnswer(${index})" class="w-full p-4 text-left border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition duration-300">
+                                ${option}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectQuizAnswer(selectedIndex) {
+            const question = quizQuestions[currentQuizQuestion];
+            const isCorrect = selectedIndex === question.correct;
+            
+            if (isCorrect) {
+                quizScore++;
+            }
+            
+            // Show explanation
+            const content = document.getElementById('quiz-content');
+            content.innerHTML = `
+                <div class="text-center">
+                    <div class="mb-6">
+                        <i class="fas fa-${isCorrect ? 'check-circle text-green-600' : 'times-circle text-red-600'} text-6xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-4">${isCorrect ? 'Correct!' : 'Not quite right'}</h3>
+                        <p class="text-gray-600 mb-6">${question.explanation}</p>
+                    </div>
+                    <button onclick="nextQuizQuestion()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+                        ${currentQuizQuestion < quizQuestions.length - 1 ? 'Next Question' : 'See Results'}
+                    </button>
+                </div>
+            `;
+        }
+
+        function nextQuizQuestion() {
+            currentQuizQuestion++;
+            
+            if (currentQuizQuestion < quizQuestions.length) {
+                showQuizQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            const percentage = Math.round((quizScore / quizQuestions.length) * 100);
+            let message, color, icon;
+            
+            if (percentage >= 80) {
+                message = "Excellent! You have great health habits.";
+                color = "green";
+                icon = "trophy";
+            } else if (percentage >= 60) {
+                message = "Good job! There's room for improvement.";
+                color = "blue";
+                icon = "thumbs-up";
+            } else {
+                message = "Consider improving your health habits.";
+                color = "orange";
+                icon = "exclamation-triangle";
+            }
+            
+            const content = document.getElementById('quiz-content');
+            content.innerHTML = `
+                <div class="text-center">
+                    <i class="fas fa-${icon} text-${color}-600 text-6xl mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4">Quiz Complete!</h3>
+                    <div class="text-4xl font-bold text-${color}-600 mb-4">${percentage}%</div>
+                    <p class="text-lg mb-6">${message}</p>
+                    <p class="text-gray-600 mb-8">You scored ${quizScore} out of ${quizQuestions.length} questions correctly.</p>
+                    <div class="space-y-3">
+                        <button onclick="startHealthQuiz()" class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+                            Take Quiz Again
+                        </button>
+                        <button onclick="closeQuizModal()" class="w-full bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-300">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            if (speechEnabled) {
+                speak(`Quiz completed. You scored ${percentage} percent`);
+            }
+        }
+
+        function closeQuizModal() {
+            document.getElementById('quiz-modal').classList.add('hidden');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show home page by default
+            showPage('home');
+            
+            // Add click listeners for modal backgrounds
+            document.getElementById('disease-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeDiseaseModal();
+                }
+            });
+            
+            document.getElementById('quiz-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeQuizModal();
+                }
+            });
+            
+            // Animate statistics on scroll
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('stat-number');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.health-stat').forEach(stat => {
+                observer.observe(stat);
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98881e6070e37e72',t:'MTc1OTQ0OTIwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
